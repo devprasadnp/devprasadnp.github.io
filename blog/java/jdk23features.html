@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Features of Java 23</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a23, #1a1a3d);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: transparent;
+      text-align: center;
+      padding: 2.5rem 0 1rem 0;
+    }
+    header h1 {
+      color: #ffd700;
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #0a0a23;
+    }
+    header p {
+      color: #ffffff;
+      margin-top: 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(10,10,35,0.25);
+    }
+    h2, h3, h4 {
+      color: #0a0a23;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    h2 {
+      border-left: 6px solid #ffd700;
+      padding-left: 0.7rem;
+      font-size: 1.6rem;
+    }
+    h3 {
+      color: #1a1a3d;
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #bfa500;
+    }
+	 .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .hero img {
+      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .hero h3 {
+      margin-top: 1rem;
+      font-size: 1.8rem;
+      color: #ffd700;
+    }
+
+    .hero p {
+      margin: 0.3rem 0;
+      font-size: 1rem;
+    }
+
+	.hero a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .hero a:hover {
+      text-decoration: underline;
+    }
+    pre {
+      background: #1a1a3d;
+      color: #ffd700;
+      padding: 1rem;
+      border-radius: 7px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    code {
+      background: #ffd700;
+      color: #1a1a3d;
+      padding: 0.18em 0.4em;
+      border-radius: 4px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 0.97em;
+    }
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      border-left: 5px solid #ffd700;
+      background: #f8f8fa;
+      color: #444;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 7px;
+      margin: 1.5rem 0;
+      display: block;
+    }
+    .author {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #888;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+  
+
+    <h1>New Features of Java 23</h1>
+    <a href="../blog.html">Back to blogs</a>
+  </header>
+  <main>
+    <article>
+      <h2>Introduction</h2>
+      <p>
+		<b>Oracle Java Support Model</b><br>
+        Below are the key features for the Java 23<br>
+		<ul>
+			<li><b>Long-Term Support (LTS):</b> Oracle designates certain JDK versions as LTS (e.g., Java 8, 11, 17, and 21), providing them with several years of support, security, and stability updates. LTS releases are preferred for production environments due to their longevity and reliability</li>
+			<li><b>Non-LTS Releases:</b> Other versions, like JDK 23, are non-LTS and receive support for only about six months, until the next version supersedes them. This encourages regular adoption of new features and improvements but is not recommended for production use due to the short support window</li>
+		</ul>
+		<h2><b>JDK 23 New Features</b></h2><br>
+		JDK 23 introduces a range of preview and incubating features, aimed at improving code expressiveness, modularity, concurrency, and performance. Most features are still in preview and not finalized. Key highlights include:
+      </p>
+      <h3>Enhanced Primitive Type Patterns:</h3>
+      <p>
+        Allows pattern matching with primitive types in instanceof and switch statements, making code cleaner and more efficient.
+      </p>
+      <pre><code>// Example of Enhanced Primitive Type Patterns
+Object obj = 42;
+switch (obj) {
+    case Integer i -> System.out.println("Integer: " + i);
+    case Long l    -> System.out.println("Long: " + l);
+    default        -> System.out.println("Other: " + obj);
+}</code></pre>
+      <h3>Flexible Constructor Bodies: </h3>
+      <p>
+        Permits statements before this() or super() calls in constructors, improving code organization.
+      </p>
+      <pre><code>// Example of Flexible Constructor Bodies
+public class MyClass {
+    private int value;
+    public MyClass(int value) {
+        int preInitialization = value * 2;  // Non-referential statement
+        this.value = preInitialization;  // Initialization
+    }
+}</code></pre>
+      <!-- <blockquote>
+        "Permits statements before this() or super() calls in constructors, improving code organization." &mdash; Prasad N P
+      </blockquote> -->
+
+<h3>Simplified Module Imports:</h3>
+      <p>
+        Enables more flexible module dependency declarations, aiding large project management.
+      </p>
+      <pre><code>// Example of Simplified Module Imports
+import module java.base;
+public class Example {
+    public static void main(String[] args) {
+        Map<Character, List<String>> grouped = Stream.of("apple", "banana", "cherry")
+            .collect(Collectors.groupingBy(s -> Character.toUpperCase(s.charAt(0))));
+        System.out.println(grouped);
+    }
+}</code></pre>
+
+ <h3>Structured Concurrency:</h3>
+      <p>
+        Manages related concurrent tasks as a single unit, simplifying error handling and resource management.
+      </p>
+      <pre><code>// Example of Structured Concurrency
+Response handle() throws ExecutionException, InterruptedException {
+    try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+        Supplier<String> user = scope.fork(() -> findUser());
+        Supplier<Integer> order = scope.fork(() -> fetchOrder());
+
+        scope.join()            // Join both subtasks
+             .throwIfFailed();  // Propagate errors if any
+
+        // Both subtasks have succeeded, compose their results
+        return new Response(user.get(), order.get());
+    }
+}</code></pre>
+
+
+ <h3>Updated Class-File API:</h3>
+      <p>
+        Provides a new API for reading and writing Java class files, useful for tooling and frameworks.
+      </p>
+      <pre><code>//Code Example
+ClassFile classFile = ClassFile.read(Paths.get("MyClass.class"));
+List<Method> methods = classFile.methods();
+for (Method method : methods) {
+    System.out.println("Method name: " + method.name());
+}</code></pre>
+
+
+ <h3>Stream Gatherers:</h3>
+      <p>
+        Enhances stream processing with custom intermediate operations for more efficient data collection.
+      </p>
+      <pre><code>// Example
+List<String> result = Stream.of("a", "b", "c", "d")
+    .gather(s -> s.toUpperCase())
+    .toList();
+System.out.println(result);
+</code></pre>
+
+ <h3>Vector API Enhancements:</h3>
+      <p>
+       Continues to evolve, enabling high-performance vector computations for numerical applications.
+      </p>
+      <pre><code>// Example
+FloatVector.Species SPECIES = FloatVector.SPECIES_256;
+float[] array = { 1.0f, 2.0f, 3.0f, 4.0f };
+FloatVector vector
+    = FloatVector.fromArray(SPECIES, array, 0);
+FloatVector result = vector.mul(2);
+result.intoArray(array, 0);
+System.out.println(Arrays.toString(array));
+</code></pre>
+
+ <h3>Generational ZGC:</h3>
+      <p>
+        Optimizes garbage collection by managing young and old generations separately, improving performance for large heaps.
+      </p>
+
+
+ <h3>Markdown Documentation Comments:</h3>
+      <p>
+        Markdown Documentation Comments:
+      </p>
+      <pre><code>/**
+ * # Example
+ *
+ * This is a **Markdown** comment.
+ *
+ * - Item 1
+ * - Item 2
+ */
+public class Example {
+    // Class implementation
+}</code></pre>
+
+
+
+
+
+      <h2>Conclusion</h2>
+      <p><ul>
+        <li>JDK 23 is a major milestone for Java, introducing significant improvements in performance, security, and developer productivity. Updates include enhanced patterns for primitive types, flexible constructor bodies, simplified module imports, and structured concurrency, keeping Java modern and robust. Advanced tooling, security upgrades, and community-driven innovation further establish Java as a leading-edge technology.
+</li><li>
+Future releases promise exciting developments such as lightweight threads (Project Loom), better native code interaction (Project Panama), and value types (Project Valhalla), focusing on efficiency, scalability, and ease of use. With ongoing community involvement, Java is poised to meet the demands of contemporary software development.
+</li><li>
+To maximize Java’s potential, developers should stay current with JDK releases and actively participate in the OpenJDK community, embracing new features and helping shape Java’s future.
+     </li> </p>
+      <div class="author">
+		Written by <a href="https://devprasadnp.github.io/">Prasad N P</a> &middot; June 21, 2025
+		References : <a href="https://www.geeksforgeeks.org/jdk-23-new-features-of-java-23/"> GeeksForGeeks </a> | <a href="https://blogs.oracle.com/java/post/the-arrival-of-java-23"> Oracle </a>
+    </article>
+  </main>
+</body>
+</html>

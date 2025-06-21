@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technical Blog Template</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a23, #1a1a3d);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: transparent;
+      text-align: center;
+      padding: 2.5rem 0 1rem 0;
+    }
+    header h1 {
+      color: #ffd700;
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #0a0a23;
+    }
+    header p {
+      color: #ffffff;
+      margin-top: 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(10,10,35,0.25);
+    }
+    h2, h3, h4 {
+      color: #0a0a23;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    h2 {
+      border-left: 6px solid #ffd700;
+      padding-left: 0.7rem;
+      font-size: 1.6rem;
+    }
+    h3 {
+      color: #1a1a3d;
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #bfa500;
+    }
+    pre {
+      background: #1a1a3d;
+      color: #ffd700;
+      padding: 1rem;
+      border-radius: 7px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    code {
+      background: #ffd700;
+      color: #1a1a3d;
+      padding: 0.18em 0.4em;
+      border-radius: 4px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 0.97em;
+    }
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      border-left: 5px solid #ffd700;
+      background: #f8f8fa;
+      color: #444;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 7px;
+      margin: 1.5rem 0;
+      display: block;
+    }
+    .author {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #888;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Async Patterns in JavaScript</h1>
+    <p>Exploring callbacks, promises, and async/await with modern style</p>
+	 <a href="../blog.html">Back to blogs</a>
+  </header>
+  <main>
+    <article>
+      <h2>Introduction</h2>
+      <p>
+        Asynchronous programming is a core skill for any JavaScript developer. This article covers the essential patterns and best practices for managing async code.
+      </p>
+      <h3>Callbacks</h3>
+      <p>
+        A callback is a function passed as an argument to another function, to be executed later.
+      </p>
+      <pre><code>// Example of a simple callback
+function fetchData(callback) {
+  setTimeout(() => {
+    callback('Data loaded');
+  }, 1000);
+}</code></pre>
+      <h3>Promises</h3>
+      <p>
+        Promises provide a cleaner, more robust way to handle asynchronous results and errors.
+      </p>
+      <pre><code>// Example of a Promise
+function fetchDataPromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Data loaded');
+    }, 1000);
+  });
+}</code></pre>
+      <blockquote>
+        "Promises simplify deferred and asynchronous computations." &mdash; JavaScript Docs
+      </blockquote>
+      <h3>Async/Await</h3>
+      <p>
+        <code>async</code> and <code>await</code> keywords allow you to write asynchronous code that looks synchronous.
+      </p>
+      <pre><code>// Example using async/await
+async function loadData() {
+  const result = await fetchDataPromise();
+  console.log(result);
+}</code></pre>
+      <h2>Conclusion</h2>
+      <p>
+        Mastering these async patterns is essential for building responsive web applications.
+      </p>
+      <div class="author">
+        Written by <a href="https://devprasadnp.github.io/">Prasad N P</a> &middot; June 21, 2025
+		References : <a href="https://www.geeksforgeeks.org/jdk-23-new-features-of-java-23/"> GeeksForGeeks </a> | <a href="https://blogs.oracle.com/java/post/the-arrival-of-java-23"> Oracle </a>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
