@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design Patterns Overview</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a23, #1a1a3d);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: transparent;
+      text-align: center;
+      padding: 2.5rem 0 1rem 0;
+    }
+    header h1 {
+      color: #ffd700;
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #0a0a23;
+    }
+    header p {
+      color: #ffffff;
+      margin-top: 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(10,10,35,0.25);
+    }
+    h2, h3, h4 {
+      color: #0a0a23;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    h2 {
+      border-left: 6px solid #ffd700;
+      padding-left: 0.7rem;
+      font-size: 1.6rem;
+    }
+    h3 {
+      color: #1a1a3d;
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #bfa500;
+    }
+    pre {
+      background: #1a1a3d;
+      color: #ffd700;
+      padding: 1rem;
+      border-radius: 7px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    code {
+      background: #ffd700;
+      color: #1a1a3d;
+      padding: 0.18em 0.4em;
+      border-radius: 4px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 0.97em;
+    }
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      border-left: 5px solid #ffd700;
+      background: #f8f8fa;
+      color: #444;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 7px;
+      margin: 1.5rem 0;
+      display: block;
+    }
+    .author {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #888;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+	img {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Design Patterns</h1>
+    <p></p>
+	 <a href="../blog.html">Back to blogs</a>
+  </header>
+  <main>
+    <article>
+      <h2>Introduction</h2>
+      <p>
+        Design patterns represent widely applicable, reusable strategies for addressing frequent challenges encountered in software design. Instead of being complete code implementations, they serve as templates or blueprints that can be customized to tackle particular problems across various contexts. By offering a standardized methodology and common vocabulary, design patterns simplify communication and collaboration among developers when resolving recurring design issues.
+      </p>
+      <h2>Design patterns are typically grouped into three main categories:</h2>
+      
+      <h3>1. Creational Patterns</h3>
+      <p>
+        Creational design patterns are a category of design patterns in software engineering that focus on object creation mechanisms. They aim to create objects in a flexible and controlled manner, suitable to the situation, while hiding the complexities of instantiation and initialization from the client code.
+      </p>
+	  <ul>
+		<li><b>Singleton:</b> Ensures a class has only one instance and provides a global point of access.</li>
+		<li><b>Factory Method:</b> Defines an interface for creating objects but lets subclasses alter the type of objects that will be created. </li>
+		<li><b>Abstract Factory:</b> Provides an interface for creating families of related or dependent objects.</li>
+		<li><b>Builder:</b> Separates the construction of a complex object from its representation.</li>
+		<li><b>Prototype:</b> Creates new objects by copying an existing object, known as the prototype</li>
+	  </ul>
+	  
+	  <h3>2. Structural Patterns</h3>
+      <p>
+        These patterns deal with object composition, helping ensure that if one part of a system changes, the entire system doesn’t need to do the same. Examples include:
+      </p>
+	  <ul>
+		<li><b>Adapter: </b>Allows incompatible interfaces to work together.</li>
+		<li><b>Bridge: </b>Separates an object’s abstraction from its implementation.</li>
+		<li><b>Composite: </b>Composes objects into tree structures to represent part-whole hierarchies.</li>
+		<li><b>Decorator: </b>Adds responsibilities to objects dynamically.</li>
+		<li><b>Facade:</b>Provides a simplified interface to a complex subsystem.</li>
+		<li><b>Proxy:</b>Provides a surrogate or placeholder for another object</li>
+	  </ul>
+      
+	  <h3>3. Behavioral Patterns</h3>
+      <p>
+        These patterns focus on communication between objects, defining how objects interact and distribute responsibility. Examples include:
+      </p>
+	  <ul>
+		<li><b>Strategy:</b>Enables selecting an algorithm’s behavior at runtime.</li>
+		<li><b>Observer:</b>Defines a dependency between objects so that when one changes state, all dependents are notified.</li>
+		<li><b>Command:</b>Encapsulates a request as an object, allowing for parameterization and queuing of requests.</li>
+		<li><b>Chain of Responsibility:</b>Passes a request along a chain of handlers.</li>
+		<li><b>Template Method:</b>Defines the skeleton of an algorithm, deferring some steps to subclasses</li>
+		<li><b>Iterator: </b> It provides a standard way to sequentially access elements of a collection without exposing its underlying representation or structure. </li>
+		<li><b>State:</b>Allows an object to alter its behavior when its internal state changes.</li>
+		<li><b>Mediator: </b> It reduces coupling between components by making them communicate indirectly through a special mediator object.</li>
+		<li><b>Memento: </b> It enables capturing and externalizing an object's internal state so that the object can be restored to that state later, without violating encapsulation.</li>
+		<li><b>Visitor: </b> It allows you to separate an algorithm from the objects on which it operates, enabling you to add new operations to existing object structures without modifying their classes.</li>
+		<li><b>Interpreter: </b> It defines a way to interpret and evaluate sentences or expressions in a language by representing its grammar as a set of classes. </li>
+	  </ul>
+	  
+	  
+	  <h2>Key Characteristics</h2>
+      <ol>
+		<li>
+			They encapsulate knowledge about which concrete classes the system uses.
+		</li>
+		<li>
+			They hide how instances of these classes are created and combined.
+		</li>
+		<li>
+			They promote flexibility, reusability, and maintainability by separating object creation from its usage
+		</li>
+	  </ol>
+	  
+	  <h2>Uses and Benefits of Design Patterns</h2>
+      <ol>
+		<li>
+			<b> Reusability: </b>Patterns provide proven solutions, enabling developers to reuse best practices and avoid reinventing the wheel.
+		</li>
+		<li>
+			<b> Maintainability: </b>Code becomes easier to maintain and extend, as patterns clarify the structure and intent of the design.
+		</li>
+		<li>
+			<b> Communication: </b>Design patterns offer a shared vocabulary, making it easier for teams to discuss solutions and collaborate.
+		</li>
+		<li>
+			<b> Scalability: </b>Patterns help create scalable and flexible software architectures that can accommodate future changes.
+		</li>
+		<li>
+			<b>Problem Solving:  </b>They address common software design challenges, such as object creation, system structure, and object interaction, with established strategies.
+		</li>
+		<li>
+			<b> Readability: </b>Code that uses well-known patterns is easier for other developers to understand and modify
+		</li>
+	  </ol>
+	  <img src="img/dpoverview.png">
+	  
+      <div class="author">
+        Written by <a href="https://devprasadnp.github.io/">Prasad N P</a> &middot; July 07, 2025
+		References : Telisco Learn | Internet
+      </div>
+    </article>
+  </main>
+</body>
+</html>
