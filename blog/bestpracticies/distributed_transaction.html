@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Distributed Transaction</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a23, #1a1a3d);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: transparent;
+      text-align: center;
+      padding: 2.5rem 0 1rem 0;
+    }
+    header h1 {
+      color: #ffd700;
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #0a0a23;
+    }
+    header p {
+      color: #ffffff;
+      margin-top: 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(10,10,35,0.25);
+    }
+    h2, h3, h4 {
+      color: #0a0a23;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    h2 {
+      border-left: 6px solid #ffd700;
+      padding-left: 0.7rem;
+      font-size: 1.6rem;
+    }
+    h3 {
+      color: #1a1a3d;
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #bfa500;
+    }
+    pre {
+      background: #1a1a3d;
+      color: #ffd700;
+      padding: 1rem;
+      border-radius: 7px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    code {
+      background: #ffd700;
+      color: #1a1a3d;
+      padding: 0.18em 0.4em;
+      border-radius: 4px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 0.97em;
+    }
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      border-left: 5px solid #ffd700;
+      background: #f8f8fa;
+      color: #444;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 7px;
+      margin: 1.5rem 0;
+      display: block;
+    }
+    .author {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #888;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+	img {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distributed Transaction</h1>
+    <p>Orchestrating seamless consistency across multiple systems — making complex transactions look simple in a distributed world</p>
+	 <a href="../blog.html">Back to blogs</a>
+  </header>
+  <main>
+    <article>
+      <h2>Introduction</h2>
+      <p>
+        A distributed transaction is a coordinated operation that involves multiple systems or databases, ensuring that all individual actions within the transaction either all succeed or all fail together. This atomic commitment is critical for preserving data integrity and consistency across multiple, geographically distributed resources common in modern computing environments.
+      </p>
+	  <p>Because these transactions span different nodes or systems, they must handle challenges such as network failures and partial updates. </p>
+      <h3>What is the need for a Distributed Transaction</h3>
+      <p>
+        The requirement for distributed transactions emerges from the need to maintain data consistency and ensure reliability across multiple independent systems or resources operating within a distributed computing environment. Specially Distributed transactions uphold the ACID properties:
+		<ul>		
+			<li><b>Atomicity: </b>all parts complete or none do,				</li>
+			<li><b>Consistency:</b> data remains valid before and after,        </li>
+			<li><b>Isolation: </b>concurrent transactions do not interfere,     </li>
+			<li><b>Durability: </b>committed changes survive failures.          </li>
+		</ul>
+		This ensures reliable and consistent data operations, which is especially crucial in industries like banking,insurence, e-commerce, and supply chain management where data is spread over multiple nodes or databases.
+      </p>
+      
+	  <h3>Transactions in Monolithic Architecture</h3>
+      <p>
+        In a monolithic architecture, the application is built as a single, unified unit encompassing its database interactions, business logic, and user interface components. Managing transactions in this context is generally simpler because the data and services are centralized within one system.
+      </p>
+	  <p> <b> Example:</b>Consider a basic online e-commerce site built using a monolithic architecture. When a customer places an order, multiple sequential steps are executed within a single unified system:
+		<ol>
+			<li> The system adds the item to the shopping cart and updates it. </li>
+			<li> Payment processing is initiated and completed. </li>
+			<li> The order details are recorded in the system. </li>
+		</ol>
+		These steps are performed within a single transaction on the same database. If any step encounters a failure, the entire transaction is rolled back to preserve data consistency. Managing this rollback is straightforward because all operations are tightly coupled and operate within a single database system.
+	  </p>
+	  
+	  <h3>Transactions in Microservices Architecture</h3>
+      <p>
+        Microservices architecture decomposes an application into smaller, independent services, each managing its own database. This distributed design introduces considerable challenges in preserving transactional integrity across multiple services and separate databases.
+      </p>
+	   <p> <b>Example: </b>Now, imagine transforming the online e-commerce site into a microservices architecture, where the application is divided into distinct services—Inventory Service, Payment Service, and Order Service—each maintaining its own database. When a user places an order, the transaction involves multiple services:
+		<ol>
+			<li> The Inventory Service verifies and updates the stock levels. </li>
+			<li> The Payment Service handles the payment processing. </li>
+			<li> The Order Service records the order details. </li>
+		</ol>
+		In this case, managing the transaction becomes more complex. If the payment processing fails after the inventory has been updated, a mechanism is required to undo the inventory change to preserve data consistency. Unlike in a monolithic architecture, a single database transaction rollback is not sufficient because the operations span multiple independent services and databases.
+	  </p>
+	  
+	  <h3>Types of Distributed Transactions</h3>
+      <p>
+        Distributed transactions coordinate operations across multiple nodes or resources to uphold the ACID properties—Atomicity, Consistency, Isolation, and Durability—ensuring reliable and consistent data management. These transactions make certain that all actions within the process either complete successfully as a whole or fail entirely, maintaining overall system integrity across distributed systems. Common types and protocols used to manage distributed transactions include mechanisms such as two-phase commit and compensating transactions, which help address the complexity of coordinating independent services and databases involved in the transaction. This foundation is especially vital in microservices architectures, where data and processes are decentralized but must remain consistent and reliable despite network and system distribution.
+		<ol>
+			<li> <b>  Two-Phase Commit Protocol (2PC):</b> The Two-Phase Commit Protocol (2PC) is a distributed transaction management technique designed to ensure atomicity across multiple distributed databases or services. It coordinates all participating nodes so that a transaction either commits on all of them or aborts everywhere, maintaining data consistency despite failures or network issues.The protocol operates in two distinct phases:
+				<ul>
+					<li> <b>Phase One — Prepare Phase:  </b>
+						<ul>
+							<li> The coordinator sends a prepare request to all participating sites. </li>
+							<li> Each participant executes the transaction locally up to the point of readiness, writing a "ready to commit" entry in its log if successful, or an "abort" if it cannot commit.</li>
+							<li> The participants then reply to the coordinator with either ready or abort.</li>
+						</ul>
+					</li>
+					<li> <b> Phase Two — Commit/Abort Phase: </b> 
+						<ul>
+							<li> If all participants respond ready, the coordinator decides to commit the transaction. </li>
+							<li> The coordinator logs the commit decision and sends a commit message to all participants.</li>
+							<li> Participants commit the transaction and log the outcome.</li>
+						</ul>
+					</li>
+				</ul>
+				If any participant responds with abort or fails to respond within a timeout, the coordinator aborts the transaction, logs it, and instructs all participants to abort.
+				<img src="img/2pc.png">
+			</li>
+			<li> <b> Three-Phase Commit Protocol (3PC)  </b>The Three-Phase Commit (3PC) protocol is an extension of the Two-Phase Commit (2PC) protocol designed to address the blocking problem and improve fault tolerance in distributed transactions by adding an extra phase. While 2PC can cause indefinite blocking if the coordinator fails during the commit phase, 3PC introduces an additional "pre-commit" phase that helps systems avoid this issue and improves overall system availability. How 3PC works:
+				<ul>
+					<li> <b> Prepare (CanCommit) Phase: </b> The coordinator asks all participants if they are ready to commit, similar to the prepare phase in 2PC. Participants vote yes or no. </li>
+					<li> <b> Pre-Commit Phase: </b> If all participants vote yes, the coordinator sends a pre-commit message, and participants acknowledge this. At this point, all participants are guaranteed to have completed the prepare phase and are ready to commit. If any participant fails to receive the pre-commit message within a timeout, the transaction is aborted.</li>
+					<li> <b> Commit Phase:</b> After all participants acknowledge the pre-commit, the coordinator sends the commit message. Participants then commit the transaction and notify the coordinator. </li>
+				</ul>
+				<img src="img/3pc.png">
+			</li>
+			<li> <b> XA transactions : </b>XA transactions are a specific implementation of the Two-Phase Commit (2PC) protocol, designed to ensure atomicity in distributed transactions across various heterogeneous components like databases, message queues, and application servers.
+		The XA standard outlines a Distributed Transaction Processing (DTP) model involving three key software components:
+				<ul>
+					<li> <b> Application Program (AP):</b> Defines the boundaries of a transaction and the actions that constitute it . </li>
+					<li> <b> Resource Managers (RMs):</b> These are the systems that provide access to shared resources, such as databases or file systems. Many relational databases and message brokers support XA .</li>
+					<li> <b> Transaction Manager (TM):</b> Also known as the XA Coordinator, the TM assigns transaction identifiers, monitors their progress, and is responsible for transaction completion and failure recovery. It coordinates the 2PC process.</li>
+				</ul>
+			</li>
+		</ol>
+      </p>
+	  
+	  
+	  <h3>Implementing Distributed Transactions</h3>
+      <p>Distributed transactions are implemented through the collaboration of several key components and coordination protocols:
+
+        
+      </p>
+	   <p> <b> </b>
+		<ol>
+			<li> <b>Transaction Managers (TMs): </b> These entities oversee and coordinate transactions spanning multiple resource managers, such as databases or message queues. They ensure that all transactions comply with the ACID properties — Atomicity, Consistency, Isolation, and Durability — even when involving different and distributed resources.</li>
+			<li> <b>Resource Managers (RMs): </b>Resource managers handle the specific resources involved in a distributed transaction, including databases or file systems. They work closely with the transaction manager to either prepare for committing changes or perform rollbacks, depending on the TM's directives. </li>
+			<li> <b> Coordination Protocols:</b> Distributed transactions leverage coordination protocols like Two-Phase Commit (2PC), Three-Phase Commit (3PC), or consensus algorithms such as Paxos and Raft. These protocols are crucial for achieving agreement among all participants on whether a transaction should be committed or rolled back, thereby maintaining consistency across the system.</li>
+		</ol>
+	  </p>
+	  
+	  <h3>Conclusion</h3>
+      <p>
+        	Distributed transactions come into play when a transaction spans multiple resources, such as different repositories or database systems. They offer several advantages, including ensuring data consistency, providing strong transaction guarantees, and enhancing the overall performance and scalability of the system. As a result, distributed transactions are widely adopted across various applications to leverage these benefits.
+      </p>
+	  
+	  
+	  
+	  
+      <div class="author">
+        Written by <a href="https://devprasadnp.github.io/">Prasad N P</a> &middot; July 20, 2025
+		References : <a href="https://www.geeksforgeeks.org/operating-systems/what-is-a-distributed-transaction/"> GeeksForGeeks </a> | <a href="https://medium.com/@joudwawad/microservices-pattern-distributed-transactions-saga-92b5e933cea1"> Medium </a>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
