@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caching</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a23, #1a1a3d);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: transparent;
+      text-align: center;
+      padding: 2.5rem 0 1rem 0;
+    }
+    header h1 {
+      color: #ffd700;
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #0a0a23;
+    }
+    header p {
+      color: #ffffff;
+      margin-top: 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 760px;
+      margin: 2.5rem auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(10,10,35,0.25);
+    }
+    h2, h3, h4 {
+      color: #0a0a23;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    h2 {
+      border-left: 6px solid #ffd700;
+      padding-left: 0.7rem;
+      font-size: 1.6rem;
+    }
+    h3 {
+      color: #1a1a3d;
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #bfa500;
+    }
+    pre {
+      background: #1a1a3d;
+      color: #ffd700;
+      padding: 1rem;
+      border-radius: 7px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    code {
+      background: #ffd700;
+      color: #1a1a3d;
+      padding: 0.18em 0.4em;
+      border-radius: 4px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 0.97em;
+    }
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      border-left: 5px solid #ffd700;
+      background: #f8f8fa;
+      color: #444;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 7px;
+      margin: 1.5rem 0;
+      display: block;
+    }
+    .author {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #888;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+	img {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Caching</h1>
+    <p>Cache smart, serve fast — boost your app’s performance effortlessly.</p>
+	 <a href="../blog.html">Back to blogs</a>
+  </header>
+  <main>
+    <article>
+      <h2>Introduction</h2>
+      <p>
+        Caching is the process of storing copies of frequently accessed data or files in a temporary storage location called a cache, enabling much faster retrieval than accessing the original source. It is a technique used to improve system or application performance by reducing the time and resources needed to fetch data from slower primary storage or remote servers.
+
+	In practice, when data is requested, the system first checks if the data is present in the cache (a cache hit). If so, it retrieves the data quickly from the cache. Otherwise (a cache miss), it fetches the data from the main source, then stores a copy in the cache for future requests.
+
+	Caches exist at multiple levels, including hardware (e.g., CPU caches storing frequently used instructions), software (e.g., browsers caching webpage elements like images and scripts), and network layers (e.g., content delivery networks caching web content nearer to users).
+
+	Key benefits of caching include faster data access, reduced latency, decreased load on original data sources, and an overall improved user experience. However, caching needs careful management to avoid serving outdated content by employing cache expiration and validation strategies.
+
+	In summary, caching temporarily stores data copies to speed up data retrieval in computing systems and networks, enhancing performance and efficiency by leveraging faster access to commonly requested information.
+
+      </p>
+      <h2>Where/When we have to use caching ?</h2>
+      <p>
+        Caching should be used in scenarios where improving performance, reducing latency, and easing load on slower or heavily accessed data sources is critical. Common practical use cases include:
+      </p>
+      <ul>
+      <li>
+      <h3>Database Acceleration: </h3>
+      <p>
+         When databases cannot meet throughput or latency demands, caching frequently accessed or repetitive data significantly boosts performance by avoiding repeated expensive queries.
+      </p>
+	  </li>
+	  <li>
+	  <h3> Query Acceleration:</h3>
+      <p>
+          Caching results of complex queries avoids recomputation and reduces response times for repeated database queries.
+      </p>
+	  </li>
+	  <li>
+	  
+	  <h3>Web and Mobile Application Acceleration: </h3>
+      <p>
+         For consumer-facing applications that expect high performance and high access volume, caching backend data near the application improves responsiveness and reduces backend load.
+      </p>
+	  </li>
+	  <li>
+	  <h3> API Response Caching: </h3>
+      <p>
+         Cache commonly used API calls that generate mostly static or semi-static content to reduce server calls and speed up response times (e.g., product info on e-commerce sites).
+
+      </p>
+	  </li>
+	  <li>
+	  <h3> Caching Static Assets: </h3>
+      <p>
+         Images, scripts, configuration files, and other static content that doesn't change often but is frequently requested are good cache candidates, often cached on servers or user devices for faster access.
+
+      </p>
+	  </li>
+	  <li>
+	  <h3>Session and Personalization Data: </h3>
+      <p>
+         User session info, shopping carts, preferences, and dynamic personalization data are cached to offer fast, transient storage without needing full durability of databases, improving user experience and reducing backend load.
+
+      </p>
+	  </li>
+	  <li>
+	  <h3> Content Delivery Networks (CDNs) for Media: </h3>
+      <p>
+         Media streaming services and content-heavy websites cache large volumes of static or rarely changing content close to users geographically to handle large spikes in demand and reduce load on origin servers.
+      </p>
+	  </li>
+	  <li>
+	  <h3> Distributed and Microservices Architectures: </h3>
+      <p>
+         In-memory caches are used for state storage and message passing in stateful microservices to meet throughput requirements and avoid bottlenecks.
+      </p>
+	  </li>
+	  <li>
+	  <h3>Use in SaaS Dashboards and Reporting: </h3>
+      <p>
+         Caching aggregated and frequently queried data summaries enhances resilience and maintains responsiveness when backend analytic services slow down under load.
+	  </p>
+	  </li>
+	  </ul>
+	  <p>Thus, caching is employed wherever there is frequent, repetitive, or costly data fetching or computation, and a faster, lower-latency, and more scalable solution is needed.
+      </p>
+	  
+	  
+	  <h2>How to use caching in distributed system design?</h2>
+      <p>
+       When using caching in distributed system design, several key principles and strategies ensure optimal performance, scalability, and reliability:
+
+
+      </p>
+      <ul>
+      <li>
+		<h3>Understand Distributed Caching: </h3>
+		  <p>
+			  It involves spreading cache data across multiple servers (nodes) to handle high traffic and large data volumes, reducing load on the primary database and maintaining high availability even if some nodes fail.
+		  </p>
+	  </li>
+	  <li>
+		<h3> Identify What to Cache: </h3>
+		  <p>
+			 Focus on frequently accessed, read-heavy, and relatively stable (low volatility) data such as product catalogs, user profiles, and session information. Avoid caching highly dynamic or rarely accessed data.
+		  </p>
+	  </li>
+	  <h3>Choose Appropriate Caching Strategies:</h3>
+	  <li>
+		<h3> Cache-Aside (Lazy Loading):</h3>
+		  <p>
+			 Application checks cache, on miss loads data from database, puts it in cache. Gives control but increases complexity.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3> Read-Through:</h3>
+		  <p>
+			 Cache automatically loads data from DB on miss, simplifying app logic.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3> Write-Through: </h3>
+		  <p>
+			 Writes go to cache and database synchronously, ensuring consistency but higher latency.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3>Write-Back:</h3>
+		  <p>
+			 Writes go only to cache initially, then asynchronously to DB, improving write latency but risking data loss on failure.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3> Design for Scalability and Fault Tolerance:</h3>
+		  <p>
+			 <ul>
+				<li> Scale horizontally by adding cache nodes. </li>
+				<li> Use replication to maintain copies of cache data across nodes for fault tolerance. </li>
+				<li> Implement node management to add/remove nodes dynamically. </li>
+			 </ul>
+		  </p>
+	  </li>
+	  
+	  <li>
+		<h3> Ensure Data Consistency: </h3>
+		  <p>
+			 Use strategies to keep cache and database consistent, especially in write-heavy scenarios. This might include invalidation, expiration policies, or synchronized writes.
+
+		  </p>
+	  </li>
+	  
+	  <li>
+		<h3> Implement Eviction Policies: </h3>
+		  <p>
+			 Set policies like Least Recently Used (LRU) or Time-to-Live (TTL) to automatically remove stale or less useful data, preventing cache overload.
+		  </p>
+	  </li>
+	  
+	  <li>
+		<h3> Leverage Cache Hierarchies: </h3>
+		  <p>
+			 Combine local in-memory caches (within application instances) for ultra-low latency with distributed caches that provide shared, scalable caching across services.
+
+		  </p>
+	  </li>
+	  
+	  <li>
+		<h3> Balance Load and Partition Data: </h3>
+		  <p>
+			 Partition (shard) cache data to distribute load evenly among nodes and avoid bottlenecks or hotspots.
+
+		  </p>
+	  </li>
+	  
+	  <li>
+		<h3> Estimate Capacity and Bandwidth Needs:  </h3>
+		  <p>
+			  Plan for expected read/write loads, memory requirements per node, and total cache size to meet performance goals.
+
+		  </p>
+	  </li>
+	  
+	  <li>
+		<h3> Security and Access Control: </h3>
+		  <p>
+			  Secure cache access to prevent unauthorized data retrieval or tampering.
+
+		  </p>
+	  </li>
+	  
+	  </ul>
+	  
+	  
+	  
+	  <h2>How to use caching in database connectivity for distributed springboot systems</h2>
+      <p>
+       To use caching effectively in database connectivity within a distributed Spring Boot system, the recommended approach is to implement a distributed cache that all application instances share, ensuring cache synchronization and minimized database load.
+
+      </p>
+	  <h3> Key Steps and Concepts:
+</h3>
+      <ul>
+      <li>
+		<h3> Use Redis or Similar Distributed Cache:
+</h3>
+		  <p>
+			 Redis is widely used with Spring Boot for distributed caching. It acts as a central, fast-access cache store accessible by all instances, avoiding local cache incoherence problems. Spring Boot supports Redis caching natively with the spring-boot-starter-data-redis dependency.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3>Enable Caching in Spring Boot:
+ </h3>
+		  <p>
+			 Annotate your main Spring Boot application class with @EnableCaching to activate Spring’s cache abstraction.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3> Configure Redis Cache:
+</h3>
+		  <p>
+		  Add dependencies:
+			<pre>&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;
+&lt;/dependency&gt;
+			</pre> <br>
+		Configure Redis host, port in application.properties or application.yml:<br>
+		<pre>spring.cache.type=redis
+spring.redis.host=localhost
+spring.redis.port=5454</pre><br>
+		Define CacheManager Bean (Optional if using defaults):
+		You can customize cache TTL, serialization, etc., by defining a RedisCacheManager bean with a RedisCacheConfiguration, e.g., setting entry TTL.
+
+		Cache Database Results Using Spring Cache Annotations: <br>
+		Use @Cacheable, @CachePut, and @CacheEvict on your service layer methods that fetch/update data to transparently cache DB results, for example:<br>
+		
+		<pre>@Cacheable(value = "users", key = "#userId")
+public User getUserById(Long userId) {
+	return userRepository.findById(userId).orElse(null);
+}</pre>
+
+		
+
+
+			 
+		  </p>
+	  </li>
+	  <li>
+		<h3>Handle Cache Synchronization Across Instances: </h3>
+		  <p>
+			 Since multiple Spring Boot app instances run in distributed environments, Redis ensures all instances share a synchronized cache, reducing redundant DB hits. Advanced implementations use aspects or interceptors (see concepts such as distributed locking or cache-aside patterns) to prevent race conditions and cache stampedes.
+
+		  </p>
+	  </li>
+	  <li>
+		<h3> Evict and Invalidate Cache Appropriately:
+</h3>
+		  <p>
+			 On database updates, use @CacheEvict or write-through strategies to keep cache consistent.
+
+
+		  </p>
+	  </li>
+	  <li>
+		<h3> Consider Two-Level or Hierarchical Caching (Optional):
+</h3>
+		  <p>
+			 Local in-memory cache (like Caffeine) for ultra-fast access, backed by Redis distributed cache for sharing across instances, balancing latency and coherence
+
+		  </p>
+	  </li>
+	  
+	  </ul>
+	  <img src="img/caching.png">
+	  <p>
+	  Please find the github code link : <a href = "https://github.com/devprasadnp/java-projects/tree/main/java-projects/industry-best-practices/caching-example">caching-example </a>
+	  </p>
+
+	  
+      <div class="author">
+        Written by <a href="https://devprasadnp.github.io/">Prasad N P</a> &middot; July 27, 2025
+		References : Internet
+      </div>
+    </article>
+  </main>
+</body>
+</html>
